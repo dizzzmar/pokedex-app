@@ -33,7 +33,7 @@
   --gold:#EAB308;
   --t1:#0A0A0A;
   --t2:#404040;
-  --t3:#888888;
+  --t3:#666666;
   --bd:rgba(0,0,0,0.10);
   --bd2:rgba(0,0,0,0.06);
   --st:env(safe-area-inset-top,44px);
@@ -126,7 +126,7 @@ transition:all .15s;
 .tab-badge.on{display:block}
 .tab.on{background:rgba(255,255,255,0.75);color:var(--ac);box-shadow:none}
 .tab svg{transition:color .15s}
-.tab-lbl{font-size:6px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;transition:color .15s;font-family:var(--px)}
+.tab-lbl{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;transition:color .15s;font-family:var(--px)}
 .tab.on svg,.tab.on .tab-lbl{color:var(--ac)}
 .tab:active{transform:scale(.93)}
 
@@ -134,7 +134,14 @@ transition:all .15s;
 .pg{display:none;flex-direction:column;flex:1;min-height:0;overflow:clip;height:100%}
 .pg.on{display:flex;animation:pgIn .22s cubic-bezier(.25,.46,.45,.94) both}
 @keyframes pgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-@media (prefers-reduced-motion:reduce){.pg.on{animation:none}}
+@media (prefers-reduced-motion:reduce){
+.pg.on{animation:none}
+*,*::before,*::after{animation-iteration-count:1!important;scroll-behavior:auto!important}
+.tab:active,.ibtn:active{transform:none}
+}
+:focus{outline:none}
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px;border-radius:inherit}
+input:focus-visible,select:focus-visible,textarea:focus-visible{outline-offset:0}
 
 /* ── SEARCH ── */
 .srch{padding:10px 16px 8px;flex-shrink:0}
@@ -151,7 +158,7 @@ isolate:isolate;
 flex:1;background:none;border:none;outline:none;
 color:var(--t1);font-size:16px;font-family:var(--fn);font-weight:500;
 }
-.srch-inp::placeholder{color:var(--t3)}
+.srch-inp::placeholder{color:#555}
 .srch-x{color:var(--t3);cursor:pointer;padding:9px;margin:-9px;display:none;align-items:center}
 .srch-x.on{display:flex}
 
@@ -196,7 +203,7 @@ backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
 .card:hover{background:rgba(255,255,255,0.50);box-shadow:0 4px 20px rgba(0,0,0,.08),inset 0 1px 0 rgba(255,255,255,.8);transform:translateY(-1px) scale(1.005)}
 .card:active{transform:scale(.96);background:rgba(255,255,255,0.60)}
 .card-hdr{display:flex;justify-content:space-between;align-items:center;width:100%;margin-bottom:4px;padding:0 2px}
-.card-id{font-size:7px;color:var(--t3);font-weight:400;font-family:'Silkscreen',monospace;letter-spacing:.5px}
+.card-id{font-size:8px;color:var(--t3);font-weight:400;font-family:'Silkscreen',monospace;letter-spacing:.5px}
 .card-rdot{width:6px;height:6px;border-radius:50%}
 
 .card-img{width:68px;height:68px;object-fit:contain;display:block}
@@ -206,7 +213,7 @@ backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
 .card-img.loaded{opacity:1;background:none;animation:none}
 .card-name{font-size:9px;font-weight:700;text-align:center;margin:3px 0 4px;width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--t1);letter-spacing:1.5px;text-transform:uppercase;font-family:'Silkscreen',monospace}
 .card-types{display:flex;gap:3px;flex-wrap:wrap;justify-content:center;padding-bottom:2px}
-.tbadge{padding:2px 8px;border-radius:24px;font-size:7px;font-weight:700;color:#fff;letter-spacing:.3px;opacity:0.9}
+.tbadge{padding:2px 8px;border-radius:24px;font-size:8px;font-weight:700;color:#fff;letter-spacing:.3px;opacity:0.9}
 
 /* ── MODAL ── */
 #ov{position:fixed;inset:0;background:rgba(0,0,0,.25);backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);z-index:900;display:none;align-items:flex-end}
@@ -355,7 +362,7 @@ border:2px solid transparent;cursor:pointer;min-width:44px;transition:all .12s;
 }
 .bchip.on{border-color:var(--ac);background:#FFF0F4}
 .bico{font-size:15px;line-height:1.2}
-.bnm{font-size:8px;color:var(--t2);font-weight:700;text-align:center}
+.bnm{font-size:9px;color:var(--t2);font-weight:700;text-align:center}
 .nota{margin-top:7px;display:none}
 .nota.on{display:block}
 .nta{
@@ -365,7 +372,7 @@ font-size:16px;font-family:var(--fn);font-weight:500;
 min-height:54px;resize:none;outline:none;
 }
 .nta:focus{border-color:var(--ac)}
-.nta::placeholder{color:var(--t3)}
+.nta::placeholder{color:#555}
 .msp{height:28px}
 
 /* ── FAV / TEAM PAGE HEADER ── */
@@ -405,7 +412,7 @@ background:var(--bg);cursor:pointer;transition:all .13s;font-family:var(--fn);
 }
 .tcap-chip.in-team{border-color:var(--ac);background:var(--acg);}
 .tcap-chip img{width:40px;height:40px;object-fit:contain;image-rendering:pixelated;}
-.tcap-chip span{font-size:8px;font-weight:700;color:var(--t3);text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:44px;}
+.tcap-chip span{font-size:9px;font-weight:700;color:var(--t3);text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:44px;}
 /* Game picker bottom sheet */
 .team-game-picker{
 position:fixed;inset:0;z-index:600;background:rgba(0,0,0,.4);
@@ -533,7 +540,7 @@ font-family:var(--fn);cursor:pointer;transition:all .13s;backdrop-filter:blur(3p
 .hdr-trainer{display:flex;align-items:center;gap:7px;min-width:0}
 .hdr-trainer-img{width:32px;height:32px;object-fit:contain;image-rendering:pixelated}
 .hdr-trainer-info{min-width:0}
-.hdr-trainer-lbl{font-size:8px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:1px}
+.hdr-trainer-lbl{font-size:9px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:1px}
 .hdr-trainer-name{font-size:17px;font-weight:900;letter-spacing:-.3px;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.2}
 .hdr-meta-row{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:2px}
 .hdr-stat{font-size:10px;color:var(--t3);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -1264,7 +1271,7 @@ function sendPasswordReset(){
       <div id="clock-time" style="font-family:'Silkscreen',monospace;font-size:11px;font-weight:700;color:var(--t1);letter-spacing:1.5px;line-height:1"></div>
       <div id="clock-date" style="font-family:'Silkscreen',monospace;font-size:5px;color:var(--t3);margin-top:2px;letter-spacing:.5px;text-transform:uppercase"></div>
     </div>
-    <button class="ibtn" onclick="toggleHelp(event)" title="Ayuda">
+    <button class="ibtn" aria-label="Ayuda" onclick="toggleHelp(event)" title="Ayuda">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
     </button>
     <div id="hdr-trainer-avatar" onclick="toggleUserMenu(event)" style="
@@ -1399,7 +1406,7 @@ function sendPasswordReset(){
 
 <div class="pg" id="pg-card">
   <div class="phdr" style="display:flex;align-items:center;gap:10px">
-    <button class="ibtn" onclick="goBack()">
+    <button class="ibtn" aria-label="Volver" onclick="goBack()">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
     </button>
     <div class="ptitle">Trainer Card</div>
@@ -1412,10 +1419,10 @@ function sendPasswordReset(){
   <div id="sf-home" class="sf-screen on">
     <div class="sf-phdr">
       <div class="sf-ptitle">Safari</div>
-      <button class="ibtn" onclick="sfShowShop()" title="Tienda" style="margin-left:auto"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></button>
-      <button class="ibtn" onclick="sfShowAuction()" title="Subasta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 20h20"/><path d="M5 20V8l7-6 7 6v12"/><path d="M9 20v-5h6v5"/></svg></button>
-      <button class="ibtn" onclick="sfShowMedals()" title="Medallas Safari"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="14" r="6"/><path d="M8 14l4-4 4 4"/><path d="M12 2v4"/><path d="M9 5H6L3 8"/><path d="M15 5h3l3 3"/></svg></button>
-      <button class="ibtn" onclick="sfShowHelp()" title="Cómo funciona"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></button>
+      <button class="ibtn" aria-label="Tienda" onclick="sfShowShop()" title="Tienda" style="margin-left:auto"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></button>
+      <button class="ibtn" aria-label="Subasta" onclick="sfShowAuction()" title="Subasta"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 20h20"/><path d="M5 20V8l7-6 7 6v12"/><path d="M9 20v-5h6v5"/></svg></button>
+      <button class="ibtn" aria-label="Medallas Safari" onclick="sfShowMedals()" title="Medallas Safari"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="14" r="6"/><path d="M8 14l4-4 4 4"/><path d="M12 2v4"/><path d="M9 5H6L3 8"/><path d="M15 5h3l3 3"/></svg></button>
+      <button class="ibtn" aria-label="Cómo funciona" onclick="sfShowHelp()" title="Cómo funciona"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></button>
     </div>
     <div id="sf-weather-bar" style="display:flex;align-items:center;justify-content:space-between;padding:0 2px 4px;gap:8px">
       <div id="sf-weather-chip" class="sf-weather-chip"></div>
@@ -1474,7 +1481,7 @@ function sendPasswordReset(){
   <!-- AUCTION -->
   <div id="sf-auction" class="sf-screen">
     <div class="sf-phdr">
-      <button class="ibtn" onclick="sfCloseAuction()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <button class="ibtn" aria-label="Cerrar" onclick="sfCloseAuction()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg></button>
       <div class="sf-ptitle">Subasta</div>
       <div id="sf-auction-coins" style="font-family:var(--px);font-size:10px;color:#c8a000;margin-left:auto"></div>
     </div>
@@ -1495,7 +1502,7 @@ function sendPasswordReset(){
   <!-- MEDALS -->
   <div id="sf-medals" class="sf-screen">
     <div class="sf-phdr">
-      <button class="ibtn" onclick="sfCloseMedals()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <button class="ibtn" aria-label="Cerrar" onclick="sfCloseMedals()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg></button>
       <div class="sf-ptitle">Medallas Safari</div>
       <div id="sf-medals-count" style="font-family:var(--px);font-size:10px;color:var(--t3);margin-left:auto"></div>
     </div>
@@ -1504,7 +1511,7 @@ function sendPasswordReset(){
   <!-- HELP -->
   <div id="sf-help" class="sf-screen">
     <div class="sf-phdr">
-      <button class="ibtn" onclick="sfCloseHelp()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <button class="ibtn" aria-label="Cerrar" onclick="sfCloseHelp()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg></button>
       <div class="sf-ptitle">Cómo funciona</div>
     </div>
     <div class="gscroll" style="padding:12px 14px 32px;display:flex;flex-direction:column;gap:12px">
@@ -1592,7 +1599,7 @@ function sendPasswordReset(){
   <!-- COLLECTION -->
   <div id="sf-collection" class="sf-screen">
     <div class="sf-phdr">
-      <button class="ibtn" onclick="showSafariHome()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+      <button class="ibtn" aria-label="Volver" onclick="showSafariHome()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg></button>
       <div class="sf-ptitle">Pokédex Safari</div>
       <div id="sf-coll-count" style="font-family:var(--px);font-size:10px;color:var(--t3);margin-left:auto"></div>
     </div>
@@ -1862,7 +1869,7 @@ function sendPasswordReset(){
 <div id="mdl">
   <div class="mpull"></div>
   <div class="mhdr">
-    <button class="ibtn" onclick="closeMdl()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    <button class="ibtn" aria-label="Cerrar" onclick="closeMdl()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     <span class="mnum" id="mnum">#001</span>
     <div class="mmode-btns">
       <button class="mmode-btn" id="mmode-art" onclick="setMImgMode('art')" title="Arte oficial"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor" stroke="none"/><polyline points="21 15 16 10 5 21"/></svg></button>
@@ -4263,7 +4270,7 @@ function _sfAucHistory(){
       <img src="${sprSrc}" style="width:40px;height:40px;image-rendering:pixelated" onerror="this.style.opacity=.3">
       <div style="flex:1;text-align:left">
         <div style="font-family:var(--px);font-size:10px;font-weight:800;color:var(--t1)">${cap(d.pokeName||'?')}</div>
-        <div style="font-family:var(--px);font-size:8px;${d.won?'color:#2e7d32':'color:#888'}">${d.won?`Ganaste · ${d.userBid} ${_si('coin',10)}`:`Perdiste · ${d.userBid} ${_si('coin',10)} devueltos`}</div>
+        <div style="font-family:var(--px);font-size:8px;${d.won?'color:#2e7d32':'color:var(--t3)'}">${d.won?`Ganaste · ${d.userBid} ${_si('coin',10)}`:`Perdiste · ${d.userBid} ${_si('coin',10)} devueltos`}</div>
         ${date?`<div style="font-family:var(--px);font-size:7px;color:var(--t3)">${date}</div>`:''}
       </div>
     </div>`;
@@ -4322,7 +4329,7 @@ function _sfShowCatchCard(data){
   if(!el)return;
   const sprSrc=`https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/${data.shiny?'shiny/':''}${data.poke.id}.png`;
   const tc=TYPES.find(t=>t.id===data.poke.types[0])?.c||'#888';
-  const genderHtml=data.gender==='M'?`<span style="color:#1565c0">♂</span>`:data.gender==='F'?`<span style="color:#ad1457">♀</span>`:`<span style="color:#888">⚪</span>`;
+  const genderHtml=data.gender==='M'?`<span style="color:#1565c0">♂</span>`:data.gender==='F'?`<span style="color:#ad1457">♀</span>`:`<span style="color:var(--t3)">⚪</span>`;
   const tierLabel=SAFARI_TIER_LABELS[data.tier];
   el.innerHTML=`
     <div style="text-align:center;margin-bottom:16px">
@@ -4671,7 +4678,7 @@ function _sfRenderBallRow(){
     {type:'master',count:b.master||0,label:'Master'},
   ].filter(o=>o.count>0||o.type==='poke');
   const hasAny=options.some(o=>o.count>0);
-  if(!hasAny){row.innerHTML='<span style="font-family:var(--px);font-size:9px;color:#888">Sin Poké Balls</span>';return;}
+  if(!hasAny){row.innerHTML='<span style="font-family:var(--px);font-size:9px;color:var(--t3)">Sin Poké Balls</span>';return;}
   if(!options.find(o=>o.type===S.safari.selBall&&o.count>0))
     S.safari.selBall=options.find(o=>o.count>0).type;
   row.innerHTML=`<div class="sf-ball-row-lbl" style="width:100%">Seleccionar ball</div>`
@@ -7816,7 +7823,7 @@ const bg2=tc(form?.types?.[0]||p.types[0]);
 const types=(form?.types||p.types).map(t=>`<span class="tbadge" style="background:${tc(t)};font-size:8px;padding:2px 6px">${cap(t)}</span>`).join('');
 const isFav=[...S.favs].some(k=>parseInt(String(k).split('*')[0])===p.id);
 const isCap=Object.keys(S.track).some(k=>parseInt(String(k).split('_')[0])===p.id&&Object.values(S.track[k]).some(g=>g?.captured));
-return`<div class="tslot filled" onclick="bldOpenSlot(${i})" style="cursor:pointer;background:linear-gradient(135deg,rgba(255,255,255,0.85),rgba(255,255,255,0.6));border:1px solid rgba(255,255,255,0.95);box-shadow:0 2px 12px rgba(0,0,0,.08)"> <button class="tslot-rm" onclick="event.stopPropagation();rmTeamSlot(${i},'${gid}')"> <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> </button> <div style="position:absolute;top:6px;left:8px;font-size:8px;font-weight:700;color:var(--t3)">#${pad(p.id)}</div> <div style="position:absolute;top:5px;right:24px;display:flex;gap:3px;align-items:center"> ${isFav?`<svg width="9" height="9" viewBox="0 0 24 24" fill="var(--red)" stroke="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`:''} ${isCap?`<svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><circle cx="12" cy="12" r="3" fill="var(--t3)"/></svg>`:''} </div> ${slot.isShiny?`<div style="position:absolute;top:5px;left:28px;font-size:8px;color:var(--gold)">✦</div>`:''} <img class="tslot-img" src="${animSrc}" onerror="this.src='${sp}'"> <div class="tslot-name">${cap(p.name)}</div> <div style="display:flex;gap:3px;margin-top:4px;flex-wrap:wrap;justify-content:center">${types}</div> ${window.bldSlotLabel?bldSlotLabel(slot,gid):''} </div>`;
+return`<div class="tslot filled" onclick="bldOpenSlot(${i})" style="cursor:pointer;background:linear-gradient(135deg,rgba(255,255,255,0.85),rgba(255,255,255,0.6));border:1px solid rgba(255,255,255,0.95);box-shadow:0 2px 12px rgba(0,0,0,.08)"> <button class="tslot-rm" aria-label="Quitar del equipo" onclick="event.stopPropagation();rmTeamSlot(${i},'${gid}')"> <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> </button> <div style="position:absolute;top:6px;left:8px;font-size:8px;font-weight:700;color:var(--t3)">#${pad(p.id)}</div> <div style="position:absolute;top:5px;right:24px;display:flex;gap:3px;align-items:center"> ${isFav?`<svg width="9" height="9" viewBox="0 0 24 24" fill="var(--red)" stroke="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`:''} ${isCap?`<svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><circle cx="12" cy="12" r="3" fill="var(--t3)"/></svg>`:''} </div> ${slot.isShiny?`<div style="position:absolute;top:5px;left:28px;font-size:8px;color:var(--gold)">✦</div>`:''} <img class="tslot-img" src="${animSrc}" onerror="this.src='${sp}'"> <div class="tslot-name">${cap(p.name)}</div> <div style="display:flex;gap:3px;margin-top:4px;flex-wrap:wrap;justify-content:center">${types}</div> ${window.bldSlotLabel?bldSlotLabel(slot,gid):''} </div>`;
 }).join('');
 }
 
