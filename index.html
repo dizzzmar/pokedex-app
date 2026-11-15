@@ -1362,6 +1362,7 @@ function sendPasswordReset(){
   </div>
 
   <div id="team-analysis" style="padding:0 16px"></div>
+  <div id="team-suggest" style="padding:0 16px 12px"></div>
 
   <!-- Captured pokemon toggle -->
 
@@ -7766,6 +7767,7 @@ const btnDot=document.getElementById('team-game-dot');
 
 if(!gid||!activeGames().find(g=>g.id===gid)){
 if(slotsEl)slotsEl.innerHTML='';
+{const sg=document.getElementById('team-suggest');if(sg)sg.innerHTML='';}
 if(emptyEl)emptyEl.style.display='flex';
 if(capSection)capSection.style.display='none';
 if(counter)counter.style.display='none';
@@ -7814,7 +7816,7 @@ const bg2=tc(form?.types?.[0]||p.types[0]);
 const types=(form?.types||p.types).map(t=>`<span class="tbadge" style="background:${tc(t)};font-size:8px;padding:2px 6px">${cap(t)}</span>`).join('');
 const isFav=[...S.favs].some(k=>parseInt(String(k).split('*')[0])===p.id);
 const isCap=Object.keys(S.track).some(k=>parseInt(String(k).split('_')[0])===p.id&&Object.values(S.track[k]).some(g=>g?.captured));
-return`<div class="tslot filled" style="background:linear-gradient(135deg,rgba(255,255,255,0.85),rgba(255,255,255,0.6));border:1px solid rgba(255,255,255,0.95);box-shadow:0 2px 12px rgba(0,0,0,.08)"> <button class="tslot-rm" onclick="event.stopPropagation();rmTeamSlot(${i},'${gid}')"> <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> </button> <div style="position:absolute;top:6px;left:8px;font-size:8px;font-weight:700;color:var(--t3)">#${pad(p.id)}</div> <div style="position:absolute;top:5px;right:24px;display:flex;gap:3px;align-items:center"> ${isFav?`<svg width="9" height="9" viewBox="0 0 24 24" fill="var(--red)" stroke="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`:''} ${isCap?`<svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><circle cx="12" cy="12" r="3" fill="var(--t3)"/></svg>`:''} </div> ${slot.isShiny?`<div style="position:absolute;top:5px;left:28px;font-size:8px;color:var(--gold)">✦</div>`:''} <img class="tslot-img" src="${animSrc}" onerror="this.src='${sp}'"> <div class="tslot-name">${cap(p.name)}</div> <div style="display:flex;gap:3px;margin-top:4px;flex-wrap:wrap;justify-content:center">${types}</div> </div>`;
+return`<div class="tslot filled" onclick="bldOpenSlot(${i})" style="cursor:pointer;background:linear-gradient(135deg,rgba(255,255,255,0.85),rgba(255,255,255,0.6));border:1px solid rgba(255,255,255,0.95);box-shadow:0 2px 12px rgba(0,0,0,.08)"> <button class="tslot-rm" onclick="event.stopPropagation();rmTeamSlot(${i},'${gid}')"> <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> </button> <div style="position:absolute;top:6px;left:8px;font-size:8px;font-weight:700;color:var(--t3)">#${pad(p.id)}</div> <div style="position:absolute;top:5px;right:24px;display:flex;gap:3px;align-items:center"> ${isFav?`<svg width="9" height="9" viewBox="0 0 24 24" fill="var(--red)" stroke="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`:''} ${isCap?`<svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--t3)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><circle cx="12" cy="12" r="3" fill="var(--t3)"/></svg>`:''} </div> ${slot.isShiny?`<div style="position:absolute;top:5px;left:28px;font-size:8px;color:var(--gold)">✦</div>`:''} <img class="tslot-img" src="${animSrc}" onerror="this.src='${sp}'"> <div class="tslot-name">${cap(p.name)}</div> <div style="display:flex;gap:3px;margin-top:4px;flex-wrap:wrap;justify-content:center">${types}</div> ${window.bldSlotLabel?bldSlotLabel(slot,gid):''} </div>`;
 }).join('');
 }
 
@@ -7822,6 +7824,7 @@ return`<div class="tslot filled" style="background:linear-gradient(135deg,rgba(2
 if(capSection)capSection.style.display='block';
 renderTeamCaptured();
 renderTeamAnalysis();
+if(window.bldRenderTeamExtras)bldRenderTeamExtras();
 }
 
 function renderTeamAnalysis(){
@@ -8921,7 +8924,7 @@ return`<div class="grow${d.captured||d.shiny||d.inBox?' hd':''}" id="gr${pid}${g
 <span class="grow-level-lbl">Nivel</span>
 <input class="glvl-inp" type="number" min="1" max="100" placeholder="--" value="${d.level||''}"
 onchange="doLevel('${pid}','${game.id}',this.value)" onclick="event.stopPropagation()">
-</div>`:''} <!-- Ball picker toggle --> <div class="grow-extras"> <button class="grow-extra-btn${d.ball?' on':''}" onclick="tBalls('${pid}${game.id}')"> ${bObj?`<img src="${BALL_IMG(bObj.id)}" style="width:16px;height:16px;object-fit:contain">`:`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>`} ${bObj?bObj.n:'Ball'} </button> <button class="grow-extra-btn${d.notes?' on':''}" onclick="tNota('${pid}${game.id}')"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Nota${d.notes?' ✓':''} </button> </div> <!-- Ball selector --> <div class="bsec" id="bs${pid}${game.id}"> <div class="bslbl">Elegir Poké Ball</div> <div class="bgrid">${BALLS.map(b=>`<div class="bchip${d.ball===b.id?' on':''}" onclick="doBall('${pid}','${game.id}','${b.id}')"><div class="bico"><img src="${BALL_IMG(b.id)}" style="width:18px;height:18px;object-fit:contain" onerror="this.style.opacity='.3'"></div><div class="bnm">${b.n}</div></div>`).join('')}</div>
+</div>`:''} <!-- Ball picker toggle --> <div class="grow-extras"> <button class="grow-extra-btn${d.ball?' on':''}" onclick="tBalls('${pid}${game.id}')"> ${bObj?`<img src="${BALL_IMG(bObj.id)}" style="width:16px;height:16px;object-fit:contain">`:`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>`} ${bObj?bObj.n:'Ball'} </button> <button class="grow-extra-btn${d.notes?' on':''}" onclick="tNota('${pid}${game.id}')"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Nota${d.notes?' ✓':''} </button> ${d.captured&&window.bldHasBuild&&bldHasBuild(game.id)?`<button class="grow-extra-btn${d.build&&(d.build.nature||d.build.ability||Object.keys(d.build.evs||{}).length||Object.keys(d.build.ivs||{}).length)?' on':''}" onclick="bldOpen('${pid}','${game.id}')"> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> Ficha </button>`:''} </div> <!-- Ball selector --> <div class="bsec" id="bs${pid}${game.id}"> <div class="bslbl">Elegir Poké Ball</div> <div class="bgrid">${BALLS.map(b=>`<div class="bchip${d.ball===b.id?' on':''}" onclick="doBall('${pid}','${game.id}','${b.id}')"><div class="bico"><img src="${BALL_IMG(b.id)}" style="width:18px;height:18px;object-fit:contain" onerror="this.style.opacity='.3'"></div><div class="bnm">${b.n}</div></div>`).join('')}</div>
 </div>
 <!-- Notes -->
 <div class="nota${d.notes?' on':''}" id="nw${pid}${game.id}">
@@ -9350,5 +9353,6 @@ renderGrid();
     </div>
   </div>
 </div>
+<script src="builds.js"></script>
 </body>
 </html>
